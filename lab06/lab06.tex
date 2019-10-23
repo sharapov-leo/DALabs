@@ -1,0 +1,72 @@
+\documentclass[12pt]{article}
+
+\usepackage{fullpage}
+\usepackage{multicol,multirow}
+\usepackage{tabularx}
+\usepackage{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\begin{document}
+
+\section*{Лабораторная работа №\,6 по курсу дискрeтного анализа: калькулятор}
+
+Выполнил студент группы 08-308 МАИ \textit{Шарапов Леонид}.
+
+\subsection*{Условие}
+
+Составить программу, использующую программную библиотеку, реализующую простейшие арифметические действия и проверку условий над целыми неотрицательными числами.
+
+\subsection*{Метод решения}
+
+\begin{enumerate}
+\item Реализован класс длинного числа с перегрузками требуемых арифметических операций и условий
+\item Перегружены операции поточного ввода и вывода
+\item Основание системы счисления равняется 10000
+\item Считываются длинные числа, а затем требуемая операция
+\end{enumerate}
+
+\subsection*{Описание программы}
+
+Весь код находится в main.cpp
+
+Используемые типы данных
+\begin{enumerate}
+\item std::vector<int> num - хранение длинного числа
+\item const int - основание системы счисления и количество нулей в ней
+\item int
+\item std::string - введенное число
+\item char - операция
+\item longNumber - длинное число
+\end{enumerate}
+
+Используемые функции
+\begin{enumerate}
+\item main - считывание чисел и операции, а затем выбор действий
+\item longNumber::longNumber(int n) - конструктор для считывания длинного числа через int
+\item std::istream\& operator>>(std::istream\& in, longNumber\& obj) - перегрузка поточного ввода
+\item std::ostream\& operator<<(std::ostream\& out, longNumber obj) - перегрузка поточного вывода
+\item longNumber longNumber::operator+(const longNumber\& right) const - перегрузка операции сложения длинных чисел
+\item void longNumber::delLeadingZeros() - удаление незначащих нулей из длинного числа после выполнения операции
+\item longNumber longNumber::operator-(const longNumber\& right) const - перегрузка операции вычитания длинных чисел
+\item longNumber longNumber::operator*(const longNumber\& right) const - перегрузка операции умножения длинных чисел
+\item longNumber longNumber::operator/(const longNumber\& right) const - перегрузка операции деления длинных чисел
+\item longNumber longNumber::operator\^(const longNumber\& right) const - перегрузка операции возведения в степень длинного числа
+\item longNumber binPow(const longNumber\& right) const - рекурсивное быстрое возведение в степень
+\item bool longNumber::operator==(const longNumber\& right) const - перегрузка оператора равенства длинных чисел
+\item int longNumber::cmp(longNumber\& obj) const - функция сравнения длинных чисел, возвращающая 0, если они равны, иначе -1 или 1, если первое больше второго и наоборот
+\end{enumerate}
+
+\subsection*{Дневник отладки}
+\begin{enumerate}
+\item time limit 10pow.t - для 0 в степени x была долгая работа при больших x > 0. Введено условие, чтобы было быстрее
+\item time limit 10pow.t - переделано бинарное возведение в степень из итеративной формы в рекурсивную
+\item wrong answer 3minus.t - при вычитании из 10000 единицы l - r + k становилось меньше нуля. Исправлено
+\item wrong answer 6pow.t - для 0 в степени 0 должна выводится ошибка
+\end{enumerate}
+
+\subsection*{Выводы}
+
+Длинная арифметика используется для вычислений на ПК, потому что типы переменных в них ограничены числом, то есть для избежания переполнения. Фундаментальные математические константы, например, $\pi$ могут быть вычислены с ее помощью. Основными проблемами были долгий поиск теории, работа с ней и техническим заданием. 
+
+\end{document}

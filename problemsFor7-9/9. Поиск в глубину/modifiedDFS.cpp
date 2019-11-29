@@ -1,10 +1,10 @@
 #include <iostream>
 #include <vector>
 
-std::vector<std::vector<int>> g; // Списки смежности (орграф)
-std::vector<int> entry;					// Время входа
-std::vector<int> leave;					// Время выхода
-std::vector<bool> used;				// 0 - непройденная вершина, 1 - пройденная
+std::vector<std::vector<int>> g; // Г‘ГЇГЁГ±ГЄГЁ Г±Г¬ГҐГ¦Г­Г®Г±ГІГЁ (Г®Г°ГЈГ°Г Гґ)
+std::vector<int> entry;					// Г‚Г°ГҐГ¬Гї ГўГµГ®Г¤Г 
+std::vector<int> leave;					// Г‚Г°ГҐГ¬Гї ГўГ»ГµГ®Г¤Г 
+std::vector<bool> used;				// 0 - Г­ГҐГЇГ°Г®Г©Г¤ГҐГ­Г­Г Гї ГўГҐГ°ГёГЁГ­Г , 1 - ГЇГ°Г®Г©Г¤ГҐГ­Г­Г Гї
 
 int t = 0;
 
@@ -19,25 +19,20 @@ void dfs(int u) {
 	leave[u] = t;
 }
 
-void detect() {
-	
-
-}
-
 int main() {
 	//freopen("ancestor.in", "r", stdin);
 	//freopen("ancestor.out", "w", stdin);
 
 	int n;
 	std::cin >> n;
-	g.resize(n + 1); // Списки смежности
+	g.resize(n + 1); // Г‘ГЇГЁГ±ГЄГЁ Г±Г¬ГҐГ¦Г­Г®Г±ГІГЁ
 	entry.resize(n + 1);
 	leave.resize(n + 1);
 	used.resize(n + 1);
 	int m;
 	std::cin >> m;
 	for (int i = 0; i < m; ++i) {
-		int a, b; // (a, b) - дуга, ведущая из узла a в b
+		int a, b; // (a, b) - Г¤ГіГЈГ , ГўГҐГ¤ГіГ№Г Гї ГЁГ§ ГіГ§Г«Г  a Гў b
 		std::cin >> a >> b;
 		g[a].push_back(b);
 	}

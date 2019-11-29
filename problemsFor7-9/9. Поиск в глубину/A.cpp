@@ -1,22 +1,21 @@
 #include <iostream>
 #include <vector>
 
-std::vector<std::vector<int>> g; // Списки смежности
-std::vector<int> d;					// Время входа
-std::vector<int> f;					// Время выхода
-std::vector<bool> used;				// 0 - непройденная вершина, 1 - пройденная
+std::vector<std::vector<int>> g;		// Списки смежности
+std::vector<int> entry;					// Время входа
+std::vector<int> leave;					// Время выхода
+std::vector<bool> used;					// 0 - непройденная вершина, 1 - пройденная
 
-int t = 0;
+int t = 0;								// Время
 
-void dfs(int v) {
-	used[v] = true;
-	d[v] = t++;
-	for (int i = 0; i < g[v].size(); ++i) {
-		int to = g[v][i];
-		if (!used[to])
-			dfs(to);
-	}
-	f[v] = t++;
+void dfs(int u) {
+	++t;
+	entry[u] = t;
+	used[u] = true;
+	for (int i = 0; i < g[u].size(); ++i)
+		if (!used[g[u][i]])
+			dfs(g[u][i]);
+	leave[u] = t++;
 }
 
 int main() {
@@ -26,8 +25,8 @@ int main() {
 	int n;
 	std::cin >> n;
 	g.resize(n + 1); // Списки смежности
-	d.resize(n + 1);
-	f.resize(n + 1);
+	entry.resize(n + 1);
+	leave.resize(n + 1);
 	used.resize(n + 1);
 	int root;
 	for (int i = 1; i < n + 1; ++i) {
@@ -45,7 +44,7 @@ int main() {
 	for (int i = 0; i < m; ++i) {
 		int a, b;
 		std::cin >> a >> b;
-		ans[i] = (d[a] < d[b] && f[b] < f[a] ? 1 : 0);
+		ans[i] = (((entry[a] < entry[b]) && (leave[b] < leave[a])) ? 1 : 0);
 	}
 	for (int i = 0; i < m; ++i)
 		std::cout << ans[i] << std::endl;
